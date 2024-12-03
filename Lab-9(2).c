@@ -7,15 +7,16 @@ struct Node{
 };
 typedef struct Node node ;
 node *root=NULL,*new1,*curr,*ptr;
-int ch;
+int ch,c=0;
 char ch1;
 void create();
 void traverse_preorder(node *temp);
 void traverse_inorder(node *temp);
 void traverse_postorder(node *temp);
-void main(){
+void display(node *temp,int);
+int main(){
       while(1){
-    printf("1. Construct a binary Search tree.\n2. To traverse the tree using all the methods i.e., in-order,preorder and post order\n3.Exit\n");
+    printf("1. Construct a binary Search tree.\n2. To traverse the tree using all the methods i.e., in-order,preorder and post order\n3.Display\n4.Exit\n");
     printf("Enter your choice:");
     scanf("%d",&ch);
     switch(ch){
@@ -32,6 +33,10 @@ void main(){
           printf("\n");
           break;
         case 3:
+          printf("Level: 0\n");
+          display(root, 0);
+          break;
+        case 4:
            exit(0);
          
          
@@ -39,6 +44,7 @@ void main(){
           
     }
    }
+   return 0;
 }
 void create(){
   new1=(node *)malloc(sizeof(node));
@@ -96,4 +102,18 @@ void traverse_postorder(node *temp){
         printf(" %c",temp->data);
         
     }
+}
+
+    
+    
+    void display(node *temp, int level) {
+    if (temp == NULL) {
+        return; 
+    }
+
+    
+    printf("Data: %c, Level: %d\n", temp->data, level);
+
+    display(temp->left, level + 1);
+    display(temp->right, level + 1);
 }
