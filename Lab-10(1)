@@ -1,6 +1,6 @@
 #include <stdio.h>
 int a[10][10], vis[10], i, j;
-
+int n;
 void Dfs(int);
 
 void main() {
@@ -22,14 +22,22 @@ void main() {
     for (i = 1; i <= n; i++) {
         if (vis[i] == 0) {
             Dfs(i);
+
+        }}
+    for(i=1;i<=n;i++){
+        if(vis[i]==0){
+            printf("\nGraph is disconnected");
+            return;
         }
+       
     }
+     printf("\nGraph is connected");
 }
 
 void Dfs(int v) {
-    printf("%d ", v);
+    printf("%d -> ", v);
     vis[v] = 1;
-    for (i = 1; i <= n; i++) {
+    for (i = 1; i <=10; i++) {
         if (a[v][i] == 1 && vis[i] == 0) {
             Dfs(i);
         }
