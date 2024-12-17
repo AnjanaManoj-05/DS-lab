@@ -1,0 +1,49 @@
+#include <stdio.h>
+
+int a[10][10], vis[10], i, j;
+int queue[10], front = -1, rear = -1;
+
+void Bfs(int);
+
+void main() {
+    int n;
+    printf("Enter number of vertices\n");
+    scanf("%d", &n);
+
+    printf("Enter adjacency matrix\n");
+    for (i = 1; i <= n; i++) {
+        for (j = 1; j <= n; j++) {
+            scanf("%d", &a[i][j]);
+        }
+    }
+
+    for (i = 1; i <= n; i++) {
+        vis[i] = 0;
+    }
+
+    printf("BFS Traversal\n");
+    for (i = 1; i <= n; i++) {
+        if (vis[i] == 0) {
+            Bfs(i);
+        }
+    }
+}
+
+void Bfs(int v) {
+    front = rear = 0;
+    queue[rear] = v;
+    vis[v] = 1;
+
+    while (front <= rear) {
+        int current = queue[front++];
+        printf("%d ", current);
+
+        for (i = 1; i <= 10; i++) {
+            if (a[current][i] == 1 && vis[i] == 0) {
+                rear++;
+                queue[rear] = i;
+                vis[i] = 1;
+            }
+        }
+    }
+}
